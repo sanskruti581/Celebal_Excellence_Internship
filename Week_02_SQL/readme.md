@@ -56,4 +56,3 @@ The assignment focuses on writing and executing SQL queries for database creatio
 
 ---
 
-## Files
