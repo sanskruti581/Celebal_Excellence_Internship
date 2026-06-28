@@ -1,7 +1,7 @@
 
 # Week 02 - SQL Queries Assignment
 
-## Overview
+## Overview:
 
 This folder contains the Week 02 SQL assignment completed using SQLite and Jupyter Notebook.
 
