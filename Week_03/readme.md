@@ -17,16 +17,6 @@ This project demonstrates the use of **Advanced SQL** concepts to analyze the Su
 - SQL
 - GitHub
 
-## 📂 Project Files
-
-```
-SQL-Advanced-Analytics/
-│
-├── README.md
-├── SQL_Advanced_Analytics.sql
-├── SQL_Analysis_Report.pdf
-└── Sample-Superstore.csv
-```
 
 ## 📊 SQL Concepts Covered
 
