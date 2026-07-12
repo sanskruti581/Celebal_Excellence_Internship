@@ -77,7 +77,4 @@ Blob Storage (input/Sample-Superstore.csv)
 Blob Storage (output/CopiedSuperstore.csv)
 ```
 
-## 📄 Report
-The full report with step-by-step screenshots and explanations is available here:
-👉 [`Azure_Assignment.pdf`](./Azure_Assignment.pdf)
 
