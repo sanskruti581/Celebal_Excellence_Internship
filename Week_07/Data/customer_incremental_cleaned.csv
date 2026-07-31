@@ -1,0 +1,11 @@
+customer_id,customer_name,city,age,product,quantity,price,total_amount
+1003,Aditya,Pune,31,Laptop,2,60000,120000
+1012,Sneha,Mumbai,29,Phone,1,30000,30000
+1025,Rahul,Delhi,40,Tablet,3,25000,75000
+1040,Meera,Nagpur,36,Keyboard,1,4000,4000
+1055,Aarav,Hyderabad,27,Mouse,4,1500,6000
+1101,Yash,Surat,25,Laptop,2,45000,90000
+1102,Tanvi,Lucknow,24,Phone,1,22000,22000
+1103,Om,Pune,28,Tablet,2,18000,36000
+1104,Siya,Mumbai,30,Laptop,3,50000,150000
+1105,Ved,Goa,26,Mouse,1,2000,2000
