@@ -42,4 +42,4 @@ Week_07/
 7. Validate the results.
 
 ## Author
-**Siddhi Shinde**
+**Sanskruti Shinde**
