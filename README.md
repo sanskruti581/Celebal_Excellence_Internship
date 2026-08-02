@@ -8,7 +8,7 @@ This repository contains the assignments and project work completed during my in
 
 B.Tech Computer Engineering 
 
-**Sanjivani College Of Engineering , Kopargaon**
+**Sanjivani College Of Engineering , Kopargaon***
 
 
 
