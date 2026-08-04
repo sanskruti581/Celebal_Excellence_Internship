@@ -1,0 +1,9 @@
+DATA CLEANING REPORT
+========================================
+dedupe_orders: removed 16 duplicate order rows
+clean_orders: fixed 74 bad date formats
+clean_orders: found 41 orders with missing customer_id
+clean_products: normalized 86 product names
+dedupe_customers: removed 10 duplicate customer rows
+validate_emails: found 5 invalid emails
+check_referential_integrity: found 0 orphan order_items

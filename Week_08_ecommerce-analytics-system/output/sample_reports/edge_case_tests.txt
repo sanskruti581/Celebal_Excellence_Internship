@@ -1,0 +1,9 @@
+test_order_id_not_in_orders passed.
+test_discount_over_100 passed. revenue=-500.0 flags invalid discount.
+test_quantity_zero passed. revenue correctly 0, no crash.
+test_future_order_date passed. Detected future date 2026-09-03.
+test_cli_missing_db passed.
+test_cli_invalid_report_arg passed.
+test_cli_invalid_limit_arg passed.
+
+All edge case tests passed.
