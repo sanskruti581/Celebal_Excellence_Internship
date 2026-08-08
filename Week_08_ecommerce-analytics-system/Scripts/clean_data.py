@@ -7,7 +7,6 @@ OUTPUT_DIR = "data/cleaned"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 issues_report = []
-
 EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
@@ -34,25 +33,21 @@ def clean_orders():
 
     df = dedupe_orders(df)
 
-    # order_date comes in as either "YYYY-MM-DD HH:MM:SS" or the bad "DD-MM-YYYY" format.
-    # Try the correct format first, fall back to the bad one and reformat it.
-    good = pd.to_datetime(df["order_date"], format="%Y-%m-%d %H:%M:%S", errors="coerce")
-    bad = pd.to_datetime(df["order_date"], format="%d-%m-%Y", errors="coerce")
-    fixed_count = int(good.isna().sum() - bad[good.isna()].isna().sum())
+    good_dates = pd.to_datetime(df["order_date"], format="%Y-%m-%d %H:%M:%S", errors="coerce")
+    bad_dates = pd.to_datetime(df["order_date"], format="%d-%m-%Y", errors="coerce")
+    bad_date_count = int(good_dates.isna().sum() - bad_dates[good_dates.isna()].isna().sum())
 
-    df["order_date"] = good.fillna(bad)
+    df["order_date"] = good_dates.fillna(bad_dates)
     df["order_date"] = df["order_date"].dt.strftime("%Y-%m-%d %H:%M:%S")
 
-    # NULL / empty customer_id -> pandas NaN, kept (not dropped) so it's still
-    # visible as a data-quality issue downstream instead of silently disappearing.
     df["customer_id"] = df["customer_id"].replace(["", "NULL"], pd.NA)
     null_customer_count = int(df["customer_id"].isna().sum())
 
     df.to_csv(f"{OUTPUT_DIR}/orders.csv", index=False)
 
-    issues_report.append(f"clean_orders: fixed {fixed_count} bad date formats")
+    issues_report.append(f"clean_orders: fixed {bad_date_count} bad date formats")
     issues_report.append(f"clean_orders: found {null_customer_count} orders with missing customer_id")
-    print(f"clean_orders() done. Fixed {fixed_count} dates, {null_customer_count} missing customer_ids.")
+    print(f"clean_orders() done. Fixed {bad_date_count} dates, {null_customer_count} missing customer_ids.")
 
 
 def clean_products():
@@ -98,8 +93,6 @@ def clean_customers():
 
 
 def copy_order_items():
-    # order_items has no duplicate/format issues by design (item_id is unique per
-    # row from generation), so it just passes through unchanged.
     df = pd.read_csv(f"{INPUT_DIR}/order_items.csv")
     df.to_csv(f"{OUTPUT_DIR}/order_items.csv", index=False)
     print("Copied order_items.csv to cleaned folder (no changes needed).")

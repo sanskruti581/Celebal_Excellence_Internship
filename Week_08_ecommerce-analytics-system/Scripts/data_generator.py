@@ -22,16 +22,13 @@ STATUSES = ["PLACED", "SHIPPED", "DELIVERED", "CANCELLED", "RETURNED"]
 CUSTOMER_TYPES = ["REGULAR", "PREMIUM", "VIP"]
 REGIONS = ["NORTH", "SOUTH", "EAST", "WEST"]
 
-DUPLICATE_RATE = 0.02  # ~2% of rows get an exact duplicate appended
+DUPLICATE_RATE = 0.02
 
 
 def inject_duplicates(rows):
-    """Append exact-copy duplicate rows for ~DUPLICATE_RATE of the given rows.
-    Simulates the kind of dirty data (double-submitted forms, re-exports, etc.)
-    that clean_data.py's dedupe step is expected to catch."""
     num_dupes = int(len(rows) * DUPLICATE_RATE)
-    dupes = [row[:] for row in random.sample(rows, num_dupes)]
-    combined = rows + dupes
+    duplicate_rows = [row[:] for row in random.sample(rows, num_dupes)]
+    combined = rows + duplicate_rows
     random.shuffle(combined)
     return combined
 
@@ -41,7 +38,7 @@ def generate_customers():
     for i in range(1, NUM_CUSTOMERS + 1):
         name = fake.name()
         if random.random() < 0.02:
-            email = fake.user_name()  # invalid: no @ or domain
+            email = fake.user_name()
         else:
             email = fake.email()
         reg_date = fake.date_time_between(start_date="-2y", end_date="now")
@@ -71,7 +68,7 @@ def generate_products():
         base_name = fake.word().capitalize() + " " + subcategory
 
         name = base_name
-        if random.random() < 0.15:  # ~15% messy names
+        if random.random() < 0.15:
             messy_variants = [
                 "  " + base_name.upper() + "  ",
                 base_name.lower(),
@@ -95,14 +92,14 @@ def generate_products():
 def generate_orders(customer_ids):
     orders = []
     for i in range(1, NUM_ORDERS + 1):
-        if random.random() < 0.05:  # 5% missing customer_id
+        if random.random() < 0.05:
             customer_id = ""
         else:
             customer_id = random.choice(customer_ids)
 
         order_datetime = fake.date_time_between(start_date="-1y", end_date="now")
 
-        if random.random() < 0.10:  # 10% wrong date format
+        if random.random() < 0.10:
             order_date_str = order_datetime.strftime("%d-%m-%Y")
         else:
             order_date_str = order_datetime.strftime("%Y-%m-%d %H:%M:%S")
@@ -128,7 +125,7 @@ def generate_order_items(order_ids, product_ids):
         product_id = random.choice(product_ids)
 
         quantity = random.randint(1, 10)
-        if random.random() < 0.03:  # 3% negative quantity (returns)
+        if random.random() < 0.03:
             quantity = -abs(quantity)
 
         unit_price = round(random.uniform(50, 6000), 2)
