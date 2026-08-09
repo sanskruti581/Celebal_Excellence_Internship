@@ -44,36 +44,6 @@ Week_08/
 └── README.md
 ```
 
-## How to Run (from scratch)
-
-```bash
-# 1. Install dependencies
-pip install pandas faker tabulate
-
-# 2. Generate the raw datasets (500+ rows each, with intentional messiness)
-#    writes to data/Raw/
-python Scripts/data_generator.py
-
-# 3. Clean the data and validate referential integrity
-#    reads from data/Raw/, writes to data/cleaned/
-python Scripts/clean_data.py
-
-# 4. Create the schema (PK/FK/NOT NULL/CHECK constraints) and load cleaned data into SQLite
-python load_to_sqlite.py
-
-# 5. Run the edge-case test suite
-python test_edge_cases.py
-
-# 6. Generate a report from the command line
-python Scripts/report_cli.py --report revenue
-python Scripts/report_cli.py --report top_customers --limit 10
-python Scripts/report_cli.py --report retention
-python Scripts/report_cli.py --report segmentation
-
-# 7. (Optional) Explore all 21 SQL queries interactively
-jupyter notebook analysis.ipynb
-```
-
 ## Data Model
 
 | Table | Key columns | Notes |
