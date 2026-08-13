@@ -70,8 +70,7 @@ Initial analysis showed `price` has **zero relationship** to `catalog_price` or 
 Used `row_number() OVER (PARTITION BY order_id ORDER BY order_date DESC)` rather than a blind `DISTINCT`, ensuring the *most recent* record per order is kept — a decision that matters when duplicates aren't identical rows.
 
 **4. Handling ~49% Cancelled orders**
-Nearly half of all orders carry `order_status = 'Cancelled'`. [Describe your decision here once finalized — e.g., "Cancelled orders are included in the Gold fact tables but excluded from headline revenue KPIs, since counting cancelled revenue as 'earned' would overstate real business performance."]
-
+Nearly half of all orders carry `order_status = 'Cancelled'`. 
 ---
 
 ## 📁 Repo Structure
